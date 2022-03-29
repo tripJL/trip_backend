@@ -1,0 +1,6 @@
+db 정보
+host: 211.37.174.19
+port: 3306
+database: jws_db
+user_id: jws_id
+user_pw: jws_pw
