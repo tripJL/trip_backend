@@ -2,6 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.website.trip.biz.dao.UserDao">
+    <sql id="TABLE_NAME">user</sql>
+
     <select id="" resultType="">
     </select>
+
+    <insert id="insert">
+        INSERT INTO <include refid="TABLE_NAME"/>
+        (
+            REG_DT
+            , REG_ID
+            , LOGIN_ID
+            , EMAIL
+            , PASSWORD
+            , GRADE
+            , LOGIN_TYPE
+        )
+        VALUES
+        (
+            NOW()
+            , #{loginUserId}
+            , #{loginId}
+            , #{email}
+            , #{password}
+            , #{grade}
+            , #{loginType}
+        )
+    </insert>
 </mapper>
