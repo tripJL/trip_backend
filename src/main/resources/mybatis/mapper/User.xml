@@ -4,7 +4,10 @@
 <mapper namespace="com.website.trip.biz.dao.UserDao">
     <sql id="TABLE_NAME">user</sql>
 
-    <select id="" resultType="">
+    <select id="selectOne" resultType="com.website.trip.biz.dto.UserDto">
+        SELECT T1.*
+        FROM <include refid="TABLE_NAME"/>
+        WHERE T1.LOGIN_ID = #{value}
     </select>
 
     <insert id="insert">
@@ -29,4 +32,26 @@
             , #{loginType}
         )
     </insert>
+
+    <update id="update">
+        UPDATE <include refid="TABLE_NAME"/>
+        SET (
+            UPD_DT = NOW()
+            , UPD_ID = #{loginUserId}
+            <choose>
+                <when test="sqlUpdateType eq 'MODIFY_PASSWORD'">
+                    , PASSWORD = #{password}
+                </when>
+                <when test="sqlUpdateType eq ''">
+
+                </when>
+                <when test="sqlUpdateType eq ''">
+
+                </when>
+                <otherwise>
+                </otherwise>
+            </choose>
+        )
+        WHERE LOGIN_ID = #{loginId}
+    </update>
 </mapper>
