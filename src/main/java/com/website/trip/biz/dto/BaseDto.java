@@ -16,17 +16,17 @@ public abstract class BaseDto {
 
     private final static int DEFAULT_PAGE_SIZE = 10;
 
-    protected String loginUserId;
+    protected int loginUserId;
 
     protected String searchType;
     protected String searchValue;
 
     protected Date regDt;
-    protected String regId;
+    protected int regId;
     protected Date udtDT;
-    protected String udtId;
+    protected int udtId;
     protected Date delDt;
-    protected String delId;
+    protected int delId;
     protected boolean delYn;
 
     protected String sqlInsertType;

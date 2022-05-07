@@ -22,7 +22,7 @@ public class BoardDto extends BaseDto {
     private String contents;
     private int hits;
 
-    private String thumbnailFileId;
+    private int thumbnailFileId;
 
     // join
     private String thumbnailPath;

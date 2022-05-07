@@ -61,7 +61,7 @@
             , BOARD_TYPE
             , CATEGORY
             , TITLE
-            , CONTETS
+            , CONTENTS
             , HITS
             , THUMBNAIL_FILE_ID
         )
