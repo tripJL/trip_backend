@@ -25,19 +25,19 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public ServiceResult set(BoardDto parameter) {
 
-        if(parameter == null) {
+        if (parameter == null) {
             return ServiceResult.fail("잘못된 데이터 타입입니다.");
         }
 
         int affected;
 
-        if(parameter.getId() < 1) {
+        if (parameter.getId() < 1) {
             affected = boardDao.insert(parameter);
         } else {
             affected = boardDao.update(parameter);
         }
 
-        if(affected < 1) {
+        if (affected < 1) {
             return ServiceResult.fail("데이터 처리 중 문제 발생하였습니다.");
         }
 

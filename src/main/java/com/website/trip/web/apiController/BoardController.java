@@ -20,7 +20,7 @@ public class BoardController {
 
         ServiceResult result = boardService.set(parameter);
 
-        if(result.isFail()) {
+        if (result.isFail()) {
             return JsonResult.fail(result.getMessage());
         }
 
@@ -34,8 +34,9 @@ public class BoardController {
 
         return JsonResult.success(
                 MapUtil.setMapList(
-                boardService.gets(model),
-                boardService.totalCount(model)
-                ));
+                        boardService.gets(model),
+                        boardService.totalCount(model)
+                )
+        );
     }
 }

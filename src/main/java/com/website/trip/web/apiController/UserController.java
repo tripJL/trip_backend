@@ -19,7 +19,7 @@ public class UserController {
 
         ServiceResult result = userService.set(model);
 
-        if(result.isFail()) {
+        if (result.isFail()) {
             return JsonResult.fail(result.getMessage());
         }
 
@@ -31,7 +31,7 @@ public class UserController {
 
         ServiceResult result = userService.set(model);
 
-        if(result.isFail()) {
+        if (result.isFail()) {
             return JsonResult.fail(result.getMessage());
         }
 

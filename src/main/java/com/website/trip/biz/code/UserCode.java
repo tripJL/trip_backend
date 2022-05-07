@@ -11,9 +11,8 @@ import java.util.Map;
 @AllArgsConstructor
 public enum UserCode {
 
-    USER("user","일반사용자"),
-    ADMIN("admin", "관리자")
-    ;
+    USER("user", "일반사용자"),
+    ADMIN("admin", "관리자");
 
     private final String code;
     private final String value;
