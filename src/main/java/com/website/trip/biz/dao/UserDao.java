@@ -1,7 +1,7 @@
 package com.website.trip.biz.dao;
 
 import com.website.trip.biz.dto.UserDto;
-import org.mapstruct.Mapper;
+import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserDao {
