@@ -7,10 +7,7 @@ import com.website.trip.biz.model.input.board.SearchModule;
 import com.website.trip.biz.service.BoardService;
 import com.website.trip.common.util.MapUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +16,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping("/api/board/set.api")
-    public JsonResult set(@RequestParam BoardDto parameter) {
+    public JsonResult set(@RequestBody BoardDto parameter) {
 
         ServiceResult result = boardService.set(parameter);
 
