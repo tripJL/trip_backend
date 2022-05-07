@@ -6,7 +6,7 @@
 
     <select id="selectOne" resultType="com.website.trip.biz.dto.UserDto">
         SELECT T1.*
-        FROM <include refid="TABLE_NAME"/>
+        FROM <include refid="TABLE_NAME"/> T1
         WHERE T1.LOGIN_ID = #{value}
     </select>
 
