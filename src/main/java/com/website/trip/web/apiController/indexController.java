@@ -1,4 +1,4 @@
-package com.website.trip.web.controller;
+package com.website.trip.web.apiController;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,4 +1,4 @@
-package com.website.trip.web.controller;
+package com.website.trip.web.apiController;
 
 import com.website.trip.biz.model.common.JsonResult;
 import com.website.trip.biz.model.common.ServiceResult;
@@ -7,6 +7,7 @@ import com.website.trip.biz.model.input.user.RegisterModule;
 import com.website.trip.biz.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,6 +37,13 @@ public class UserController {
         if(result.isFail()) {
             return JsonResult.fail(result.getMessage());
         }
+
+        return JsonResult.success();
+    }
+
+    @PutMapping("/api/put.api")
+    public JsonResult put(@RequestBody ModifyPasswordModule module) {
+        System.out.println(module);
 
         return JsonResult.success();
     }
