@@ -10,7 +10,7 @@
 
     <sql id="selectWhere">
 
-        <if test="searchType != null ad searchValue != null">
+        <if test="searchType != null and searchValue != null">
             <choose>
                 <when test="searchType eq 'title'">
                     AND T1.TITLE = ${searchValue}
@@ -41,12 +41,12 @@
         WHERE 1 = 1
         <include refid="selectWhereRequire"/>
         <include refid="selectWhere"/>
-        LIMIT #{startIndex}, #{pageSize}
         ORDER BY T1.ID DESC
+        LIMIT #{startIndex}, #{pageSize}
     </select>
 
     <select id="selectListCount" resultType="int">
-        SELECT T1.*
+        SELECT COUNT(*)
         FROM <include refid="TABLE_NAME"/> T1
         WHERE 1 = 1
         <include refid="selectWhereRequire"/>

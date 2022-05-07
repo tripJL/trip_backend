@@ -28,7 +28,7 @@ public class BoardController {
     }
 
     @GetMapping("/api/board/gets.api")
-    public JsonResult gets(@RequestParam SearchModule model) {
+    public JsonResult gets(SearchModule model) {
 
         model.initPage();
 
