@@ -1,5 +1,7 @@
 package com.website.trip.common.util;
 
+import java.util.UUID;
+
 public class StringUtil {
 
     public static final String NULL = null;
@@ -19,6 +21,10 @@ public class StringUtil {
 
     public static boolean isNotEmpty(String obj) {
         return !isEmpty(obj);
+    }
+
+    public static String getUuid() {
+        return UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
     }
 
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.website.trip.biz.dao.UploadFileDao">
+    <sql id="TABLE_NAME">upload_file</sql>
+
+    <select id="selectOne" resultType="com.website.trip.biz.dto.UploadFile">
+        SELECT T1.*
+        FROM <include refid="TABLE_NAME"/> T1
+        WHERE T1.ID = #{value}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO <include refid="TABLE_NAME"/>
+        (
+            REG_DT
+            , REG_ID
+
+            , LENGTH
+            , ORIGINAL_FILE_NAME
+            , FILE_EXTENSION
+            , SAVE_FILE_NAME
+            , UPLOAD_URL
+            , LOCAL_PATH
+        )
+        VALUES
+        (
+            NOW()
+            , #{loginUserId}
+
+            , #{length}
+            , #{originalFileName}
+            , #{fileExtension}
+            , #{saveFileName}
+            , #{uploadUrl}
+            , #{localPath}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE <include refid="TABLE_NAME"/>
+        SET (
+            UPD_DT = NOW()
+            , UPD_ID = #{loginUserId}
+            , LENGTH = #{length}
+            , ORIGINAL_FILE_NAME = #{originalFileName}
+            , FILE_EXTENSION = #{fileExtension}
+            , SAVE_FILE_NAME = #{saveFileName}
+            , UPLOAD_URL = #{uploadUrl}
+            , LOCAL_PATH = #{localPath}
+        )
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM <include refid="TABLE_NAME"/>
+        WHERE ID = #{id}
+    </delete>
+</mapper>

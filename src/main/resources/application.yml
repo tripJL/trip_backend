@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: local-jws
+#    local-jws
+#    local-lsh
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+#  PUT, DELETE 사용 설정
+#  mvc:
+#    hiddenmethod:
+#      filter:
+#        enabled: true
+
+# mybatis 세팅
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+
+
+upload-file:
+  img-extension: .png .jpg .jpeg .gif

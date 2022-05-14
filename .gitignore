@@ -38,4 +38,6 @@ out/
 
 /.idea/
 
-src/main/resources/application.yml
+#src/main/resources/application.yml
+src/main/resources/application-local-jws.yml
+src/main/resources/application-local-lsh.yml
