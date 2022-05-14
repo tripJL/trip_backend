@@ -4,7 +4,7 @@
 <mapper namespace="com.website.trip.biz.dao.UserDao">
     <sql id="TABLE_NAME">user</sql>
 
-    <select id="selectOne" resultType="com.website.trip.biz.dto.UserDto">
+    <select id="selectOne" resultType="com.website.trip.biz.dto.User">
         SELECT T1.*
         FROM <include refid="TABLE_NAME"/> T1
         WHERE T1.LOGIN_ID = #{value}

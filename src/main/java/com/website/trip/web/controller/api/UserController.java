@@ -1,4 +1,4 @@
-package com.website.trip.web.apiController;
+package com.website.trip.web.controller.api;
 
 import com.website.trip.biz.model.common.JsonResult;
 import com.website.trip.biz.model.common.ServiceResult;

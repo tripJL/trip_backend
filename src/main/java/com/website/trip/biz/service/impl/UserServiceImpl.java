@@ -1,7 +1,7 @@
 package com.website.trip.biz.service.impl;
 
 import com.website.trip.biz.dao.UserDao;
-import com.website.trip.biz.dto.UserDto;
+import com.website.trip.biz.dto.User;
 import com.website.trip.biz.helper.UserHelper;
 import com.website.trip.biz.model.common.ServiceResult;
 import com.website.trip.biz.model.input.user.ModifyPasswordModule;
@@ -16,12 +16,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
 
-    private UserDto toUserDto(Object module) {
+    private User toUserDto(Object module) {
 
         if(module instanceof RegisterModule) {
             return UserHelper.toDto((RegisterModule) module);
         } else if(module instanceof ModifyPasswordModule) {
-            UserDto parameter = UserHelper.toDto((ModifyPasswordModule) module);
+            User parameter = UserHelper.toDto((ModifyPasswordModule) module);
             parameter.setSqlUpdateType("MODIFY_PASSWORD");
             return parameter;
         } else {
@@ -32,17 +32,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public ServiceResult set(Object module) {
 
-        UserDto parameter = this.toUserDto(module);
+        User parameter = this.toUserDto(module);
 
         if(parameter == null) {
             return ServiceResult.fail("잘못된 데이터 타입입니다.");
         }
 
-        UserDto userDto = userDao.selectOne(parameter.getLoginId());
+        User user = userDao.selectOne(parameter.getLoginId());
 
         int affected;
 
-        if(userDto == null) {
+        if(user == null) {
             affected = userDao.insert(parameter);
         } else {
             affected = userDao.update(parameter);

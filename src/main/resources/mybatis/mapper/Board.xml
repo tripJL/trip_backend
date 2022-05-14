@@ -28,14 +28,14 @@
         </if>
     </sql>
 
-    <select id="selectOne" resultType="com.website.trip.biz.dto.BoardDto">
+    <select id="selectOne" resultType="com.website.trip.biz.dto.Board">
         SELECT T1.*
         FROM <include refid="TABLE_NAME"/> T1
         WHERE T1.ID = #{value}
         <include refid="selectWhereRequire"/>
     </select>
 
-    <select id="selectList" resultType="com.website.trip.biz.dto.BoardDto">
+    <select id="selectList" resultType="com.website.trip.biz.dto.Board">
         SELECT T1.*
         FROM <include refid="TABLE_NAME"/> T1
         WHERE 1 = 1

@@ -1,14 +1,14 @@
 package com.website.trip.biz.dao;
 
-import com.website.trip.biz.dto.UserDto;
+import com.website.trip.biz.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserDao {
 
-    int insert(UserDto parameter);
-    int update(UserDto parameter);
+    int insert(User parameter);
+    int update(User parameter);
 
-    UserDto selectOne(String loginId);
+    User selectOne(String loginId);
 
 }

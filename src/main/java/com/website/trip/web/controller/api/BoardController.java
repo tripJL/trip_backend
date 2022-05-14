@@ -1,6 +1,6 @@
-package com.website.trip.web.apiController;
+package com.website.trip.web.controller.api;
 
-import com.website.trip.biz.dto.BoardDto;
+import com.website.trip.biz.dto.Board;
 import com.website.trip.biz.model.common.JsonResult;
 import com.website.trip.biz.model.common.ServiceResult;
 import com.website.trip.biz.model.input.board.SearchModule;
@@ -16,7 +16,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping("/api/board/set.api")
-    public JsonResult set(@RequestBody BoardDto parameter) {
+    public JsonResult set(@RequestBody Board parameter) {
 
         ServiceResult result = boardService.set(parameter);
 

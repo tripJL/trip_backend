@@ -1,6 +1,6 @@
 package com.website.trip.biz.dao;
 
-import com.website.trip.biz.dto.BoardDto;
+import com.website.trip.biz.dto.Board;
 import com.website.trip.biz.model.input.board.SearchModule;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,11 +9,11 @@ import java.util.List;
 @Mapper
 public interface BoardDao {
 
-    int insert(BoardDto parameter);
-    int update(BoardDto parameter);
+    int insert(Board parameter);
+    int update(Board parameter);
 
-    BoardDto selectOne(long id);
-    List<BoardDto> selectList(SearchModule module);
+    Board selectOne(long id);
+    List<Board> selectList(SearchModule module);
     int selectListCount(SearchModule module);
 
 }

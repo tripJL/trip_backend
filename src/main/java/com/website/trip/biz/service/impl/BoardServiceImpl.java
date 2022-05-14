@@ -1,16 +1,10 @@
 package com.website.trip.biz.service.impl;
 
 import com.website.trip.biz.dao.BoardDao;
-import com.website.trip.biz.dao.UserDao;
-import com.website.trip.biz.dto.BoardDto;
-import com.website.trip.biz.dto.UserDto;
-import com.website.trip.biz.helper.UserHelper;
+import com.website.trip.biz.dto.Board;
 import com.website.trip.biz.model.common.ServiceResult;
 import com.website.trip.biz.model.input.board.SearchModule;
-import com.website.trip.biz.model.input.user.ModifyPasswordModule;
-import com.website.trip.biz.model.input.user.RegisterModule;
 import com.website.trip.biz.service.BoardService;
-import com.website.trip.biz.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +17,7 @@ public class BoardServiceImpl implements BoardService {
     private final BoardDao boardDao;
 
     @Override
-    public ServiceResult set(BoardDto parameter) {
+    public ServiceResult set(Board parameter) {
 
         if (parameter == null) {
             return ServiceResult.fail("잘못된 데이터 타입입니다.");
@@ -45,7 +39,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardDto> gets(SearchModule module) {
+    public List<Board> gets(SearchModule module) {
 
         return boardDao.selectList(module);
     }

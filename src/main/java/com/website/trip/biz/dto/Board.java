@@ -1,8 +1,6 @@
 package com.website.trip.biz.dto;
 
-import com.website.trip.biz.model.input.board.SearchModule;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -11,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardDto extends BaseDto {
+public class Board extends BaseDto {
 
     private long id;
 
