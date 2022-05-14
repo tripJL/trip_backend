@@ -26,6 +26,13 @@ public class UploadFileServiceImpl implements UploadFileService {
 
     private final UploadFileProperties uploadFileProperties;
 
+    public boolean checkType(String contentType, String fileExtension) {
+        if (contentType.contains("image") && uploadFileProperties.getImgExtension().contains(fileExtension)) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public UploadFile uploadFile(MultipartFile file) {
         if (file == null) {
@@ -52,14 +59,14 @@ public class UploadFileServiceImpl implements UploadFileService {
             final String originalFileName = multipartFile.getOriginalFilename();
             final String fileExtension = Files.getFileExtension(originalFileName).toLowerCase();
 
-            if (multipartFile.getContentType().contains("image") && uploadFileProperties.getImgExtension().contains(fileExtension)) {
+            if (!this.checkType(multipartFile.getContentType(), fileExtension)) {
                 return null;
             }
 
             final String nowYear = DateUtil.getNowYear();
             final String nowMonth = DateUtil.getNowMonth();
 
-            this.createDirectory(uploadFileProperties.getBaseUploadFileUrl(),nowYear, nowMonth);
+            this.createDirectory(uploadFileProperties.getBaseUploadFileUrl(), nowYear, nowMonth);
 
             final String saveFileName = String.format("%s.%s", StringUtil.getUuid(), fileExtension);
             final String saveLocalPath = String.format("%s/%s/%s/%s", uploadFileProperties.getBaseUploadFileUrl(), nowYear, nowMonth, saveFileName);
@@ -79,26 +86,27 @@ public class UploadFileServiceImpl implements UploadFileService {
             log.error("Exception error : {}", e.getMessage());
         } finally {
             try {
-                if(fileOutputStream != null) {
+                if (fileOutputStream != null) {
                     fileOutputStream.close();
                 }
             } catch (IOException e) {
                 log.info(e.getMessage());
             }
         }
-        return null;
+        return uploadFile;
     }
 
     private void createDirectory(String baseUploadFileUrl, String year, String month) {
 
         String[] dirs = {
-            String.format("%s/%s/", baseUploadFileUrl, year),
-            String.format("%s/%s/%s/", baseUploadFileUrl,year,month)
+                baseUploadFileUrl,
+                String.format("%s/%s/", baseUploadFileUrl, year),
+                String.format("%s/%s/%s/", baseUploadFileUrl, year, month)
         };
 
         for (String dir : dirs) {
             File file = new File(dir);
-            if(!file.exists()) {
+            if (!file.exists()) {
                 file.mkdir();       // 폴더 생성
             }
         }

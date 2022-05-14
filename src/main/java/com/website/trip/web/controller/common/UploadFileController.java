@@ -23,7 +23,7 @@ public class UploadFileController {
             return JsonResult.fail(" 올바른 파일 형식이 아닙니다. ");
         }
 
-        return JsonResult.success();
+        return JsonResult.success(uploadFile);
     }
 
 }
