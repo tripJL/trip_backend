@@ -10,7 +10,7 @@
         WHERE T1.ID = #{value}
     </select>
 
-    <insert id="insert">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO <include refid="TABLE_NAME"/>
         (
             REG_DT

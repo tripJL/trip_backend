@@ -19,5 +19,9 @@ mybatis:
   mapper-locations: classpath:mybatis/mapper/**/*.xml
 
 
+site-info:
+  base-server-url: http://localhost:8080
+
+
 upload-file:
   img-extension: .png .jpg .jpeg .gif
