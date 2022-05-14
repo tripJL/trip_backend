@@ -1,8 +1,6 @@
 spring:
   profiles:
-    active: local-jws
-#    local-jws
-#    local-lsh
+    active: local
 
   servlet:
     multipart:
