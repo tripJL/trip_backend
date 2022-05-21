@@ -1,33 +1,28 @@
-package com.website.trip.biz.dto;
+package com.website.trip.biz.model.board;
 
+import com.website.trip.biz.model.fileUpload.FileUploadAddModel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Data
-@SuperBuilder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Board extends BaseDto {
+public class BoardInsertModule {
 
-    private long id;
+    private long loginUserId;
 
     private String boardType;
     private String category;
 
     private String title;
     private String contents;
-    private int hits;
 
     private int thumbnailFileId;
 
-    private List<FileUpload> fileContentsList;
-
-    // join
-    private String thumbnailPath;
-    private String thumbnailOriginalName;
-
+    private List<FileUploadAddModel> fileContentsList;
 }

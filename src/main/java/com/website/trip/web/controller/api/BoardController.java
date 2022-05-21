@@ -1,9 +1,11 @@
 package com.website.trip.web.controller.api;
 
-import com.website.trip.biz.dto.Board;
+import com.website.trip.biz.model.board.BoardDeleteModule;
+import com.website.trip.biz.model.board.BoardInsertModule;
+import com.website.trip.biz.model.board.BoardUpdateModule;
 import com.website.trip.biz.model.common.JsonResult;
 import com.website.trip.biz.model.common.ServiceResult;
-import com.website.trip.biz.model.input.board.SearchModule;
+import com.website.trip.biz.model.board.BoardSearchModule;
 import com.website.trip.biz.service.BoardService;
 import com.website.trip.common.util.MapUtil;
 import lombok.RequiredArgsConstructor;
@@ -15,10 +17,10 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @PostMapping("/api/board/set.api")
-    public JsonResult set(@RequestBody Board parameter) {
+    @PostMapping("/api/board/insert.api")
+    public JsonResult insert(@RequestBody BoardInsertModule module) {
 
-        ServiceResult result = boardService.set(parameter);
+        ServiceResult result = boardService.insert(module);
 
         if (result.isFail()) {
             return JsonResult.fail(result.getMessage());
@@ -27,16 +29,45 @@ public class BoardController {
         return JsonResult.success();
     }
 
-    @GetMapping("/api/board/gets.api")
-    public JsonResult gets(SearchModule model) {
+    @PostMapping("/api/board/update.api")
+    public JsonResult update(@RequestBody BoardUpdateModule module) {
+
+        ServiceResult result = boardService.update(module);
+
+        if (result.isFail()) {
+            return JsonResult.fail(result.getMessage());
+        }
+
+        return JsonResult.success();
+    }
+
+    @GetMapping("/api/board/list.api")
+    public JsonResult list(BoardSearchModule model) {
 
         model.initPage();
 
         return JsonResult.success(
                 MapUtil.setMapList(
-                        boardService.gets(model),
+                        boardService.list(model),
                         boardService.totalCount(model)
                 )
         );
     }
+
+    @GetMapping("/api/board/detail.api")
+    public JsonResult detail(BoardSearchModule model) {
+
+        model.initPage();
+
+        return JsonResult.success(boardService.detail(model));
+    }
+
+    @PostMapping("/api/board/delete.api")
+    public JsonResult delete(@RequestBody BoardDeleteModule module) {
+
+        boardService.delete(module);
+
+        return JsonResult.success();
+    }
+
 }

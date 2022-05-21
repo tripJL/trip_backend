@@ -1,4 +1,4 @@
-package com.website.trip.biz.model.input.user;
+package com.website.trip.biz.model.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

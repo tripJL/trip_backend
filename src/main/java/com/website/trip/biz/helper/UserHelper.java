@@ -1,8 +1,8 @@
 package com.website.trip.biz.helper;
 
 import com.website.trip.biz.dto.User;
-import com.website.trip.biz.model.input.user.ModifyPasswordModule;
-import com.website.trip.biz.model.input.user.RegisterModule;
+import com.website.trip.biz.model.user.ModifyPasswordModule;
+import com.website.trip.biz.model.user.RegisterModule;
 
 public class UserHelper {
 

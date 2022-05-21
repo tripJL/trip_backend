@@ -1,4 +1,4 @@
-package com.website.trip.biz.model.input.board;
+package com.website.trip.biz.model.board;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SearchModule {
+public class BoardSearchModule {
+
+    private long id;
 
     private String searchType;
     private String searchValue;

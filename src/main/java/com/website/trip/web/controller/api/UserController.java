@@ -2,8 +2,8 @@ package com.website.trip.web.controller.api;
 
 import com.website.trip.biz.model.common.JsonResult;
 import com.website.trip.biz.model.common.ServiceResult;
-import com.website.trip.biz.model.input.user.ModifyPasswordModule;
-import com.website.trip.biz.model.input.user.RegisterModule;
+import com.website.trip.biz.model.user.ModifyPasswordModule;
+import com.website.trip.biz.model.user.RegisterModule;
 import com.website.trip.biz.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

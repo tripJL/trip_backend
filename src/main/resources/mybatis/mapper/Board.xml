@@ -31,7 +31,7 @@
     <select id="selectOne" resultType="com.website.trip.biz.dto.Board">
         SELECT T1.*
         FROM <include refid="TABLE_NAME"/> T1
-        WHERE T1.ID = #{value}
+        WHERE T1.ID = #{id}
         <include refid="selectWhereRequire"/>
     </select>
 
@@ -53,7 +53,7 @@
         <include refid="selectWhere"/>
     </select>
 
-    <insert id="insert">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO <include refid="TABLE_NAME"/>
         (
             REG_DT
@@ -64,6 +64,7 @@
             , CONTENTS
             , HITS
             , THUMBNAIL_FILE_ID
+            , DEL_YN
         )
         VALUES
         (
@@ -75,6 +76,7 @@
             , #{contents}
             , #{hits}
             , #{thumbnailFileId}
+            , 0
         )
     </insert>
 
@@ -89,6 +91,16 @@
             , CONTENTS = #{contents}
             , THUMBNAIL_FILE_ID = #{thumbnailFileId}
         )
-        WHERE LOGIN_ID = #{loginId}
+        WHERE ID = #{id}
+    </update>
+
+    <update id="update">
+        UPDATE <include refid="TABLE_NAME"/>
+        SET (
+        DEL_DT = NOW()
+        , DEL_ID = #{loginUserId}
+        , DEL_YN = 1
+        )
+        WHERE ID = #{id}
     </update>
 </mapper>
