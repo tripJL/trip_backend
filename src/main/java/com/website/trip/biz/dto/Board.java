@@ -24,7 +24,7 @@ public class Board extends BaseDto {
 
     private int thumbnailFileId;
 
-    private List<FileUpload> fileContentsList;
+    private List<BoardFileMapping> fileContentsList;
 
     // join
     private String thumbnailPath;

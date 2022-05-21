@@ -9,13 +9,15 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FileMapping {
-
-    private final String TYPE_USER = "user";
+public class BoardFileMapping {
 
     private long id;
-    private String tableName;
-    private long tableId;
+    private long boardId;
     private long fileUploadId;
+
+    private String originalFileName;
+    private String uploadUrl;
+    private String fileExtension;
+    private int fileSize;
 
 }

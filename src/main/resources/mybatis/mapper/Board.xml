@@ -82,7 +82,7 @@
 
     <update id="update">
         UPDATE <include refid="TABLE_NAME"/>
-        SET (
+        SET
             UPD_DT = NOW()
             , UPD_ID = #{loginUserId}
             , BOARD_TYPE = #{boardType}
@@ -90,11 +90,10 @@
             , TITLE = #{title}
             , CONTENTS = #{contents}
             , THUMBNAIL_FILE_ID = #{thumbnailFileId}
-        )
         WHERE ID = #{id}
     </update>
 
-    <update id="update">
+    <update id="delete">
         UPDATE <include refid="TABLE_NAME"/>
         SET (
         DEL_DT = NOW()
