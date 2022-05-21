@@ -64,5 +64,9 @@ public class ServiceResult<T> {
     public static <T> ServiceResult<T> fail(String message) {
         return new ServiceResult<>(false, message);
     }
+
+    public static <T> ServiceResult<T> dbFail() {
+        return new ServiceResult<>(false, " 데이터 처리 중 문제 발생하였습니다. ");
+    }
     
 }

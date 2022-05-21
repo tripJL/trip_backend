@@ -1,10 +1,10 @@
 package com.website.trip.biz.service.impl;
 
 import com.google.common.io.Files;
-import com.website.trip.biz.dao.UploadFileDao;
-import com.website.trip.biz.dto.UploadFile;
-import com.website.trip.biz.service.UploadFileService;
-import com.website.trip.common.properties.UploadFileProperties;
+import com.website.trip.biz.dao.FileUploadDao;
+import com.website.trip.biz.dto.FileUpload;
+import com.website.trip.biz.service.FileUploadService;
+import com.website.trip.common.properties.FileUploadProperties;
 import com.website.trip.common.util.DateUtil;
 import com.website.trip.common.util.StringUtil;
 import lombok.RequiredArgsConstructor;
@@ -20,42 +20,42 @@ import java.io.IOException;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class UploadFileServiceImpl implements UploadFileService {
+public class FileUploadServiceImpl implements FileUploadService {
 
-    private final UploadFileDao uploadFileDao;
+    private final FileUploadDao fileUploadDao;
 
-    private final UploadFileProperties uploadFileProperties;
+    private final FileUploadProperties fileUploadProperties;
 
     public boolean checkType(String contentType, String fileExtension) {
-        if (contentType.contains("image") && uploadFileProperties.getImgExtension().contains(fileExtension)) {
+        if (contentType.contains("image") && fileUploadProperties.getImgExtension().contains(fileExtension)) {
             return true;
         }
         return false;
     }
 
     @Override
-    public UploadFile uploadFile(MultipartFile file) {
+    public FileUpload uploadFile(MultipartFile file) {
         if (file == null) {
-            return UploadFile.builder().result(false).build();
+            return FileUpload.builder().result(false).build();
         }
 
-        final UploadFile result = this.upload(file);
+        final FileUpload result = this.upload(file);
         if (result != null && !result.getSaveFileName().isEmpty()) {
-            result.setResult(uploadFileDao.insert(result) > 0);
+            result.setResult(fileUploadDao.insert(result) > 0);
             return result;
         } else {
-            return UploadFile.builder().result(false).build();
+            return FileUpload.builder().result(false).build();
         }
     }
 
-    private UploadFile upload(MultipartFile multipartFile) {
+    private FileUpload upload(MultipartFile multipartFile) {
 
-        final UploadFile uploadFile = new UploadFile();
+        final FileUpload fileUpload = new FileUpload();
 
         FileOutputStream fileOutputStream = null;
 
         try {
-            final int length = (int) multipartFile.getSize();
+            final int fileSize = (int) multipartFile.getSize();
             final String originalFileName = multipartFile.getOriginalFilename();
             final String fileExtension = Files.getFileExtension(originalFileName).toLowerCase();
 
@@ -66,21 +66,21 @@ public class UploadFileServiceImpl implements UploadFileService {
             final String nowYear = DateUtil.getNowYear();
             final String nowMonth = DateUtil.getNowMonth();
 
-            this.createDirectory(uploadFileProperties.getBaseUploadFileUrl(), nowYear, nowMonth);
+            this.createDirectory(fileUploadProperties.getBaseFileUploadUrl(), nowYear, nowMonth);
 
             final String saveFileName = String.format("%s.%s", StringUtil.getUuid(), fileExtension);
-            final String saveLocalPath = String.format("%s/%s/%s/%s", uploadFileProperties.getBaseUploadFileUrl(), nowYear, nowMonth, saveFileName);
-            final String saveUploadPath = String.format("%s/%s/%s/%s", uploadFileProperties.getUploadPath(), nowYear, nowMonth, saveFileName);
+            final String saveLocalPath = String.format("%s/%s/%s/%s", fileUploadProperties.getBaseFileUploadUrl(), nowYear, nowMonth, saveFileName);
+            final String saveUploadPath = String.format("%s/%s/%s/%s", fileUploadProperties.getUploadPath(), nowYear, nowMonth, saveFileName);
 
             final File file = new File(saveLocalPath);
             FileCopyUtils.copy(multipartFile.getInputStream(), new FileOutputStream(file));
 
-            uploadFile.setSaveFileName(saveFileName);
-            uploadFile.setOriginalFileName(originalFileName);
-            uploadFile.setLength(length);
-            uploadFile.setFileExtension(fileExtension);
-            uploadFile.setLocalPath(saveLocalPath);
-            uploadFile.setUploadUrl(saveUploadPath);
+            fileUpload.setSaveFileName(saveFileName);
+            fileUpload.setOriginalFileName(originalFileName);
+            fileUpload.setFileSize(fileSize);
+            fileUpload.setFileExtension(fileExtension);
+            fileUpload.setLocalPath(saveLocalPath);
+            fileUpload.setUploadUrl(saveUploadPath);
 
         } catch (Exception e) {
             log.error("Exception error : {}", e.getMessage());
@@ -93,7 +93,7 @@ public class UploadFileServiceImpl implements UploadFileService {
                 log.info(e.getMessage());
             }
         }
-        return uploadFile;
+        return fileUpload;
     }
 
     private void createDirectory(String baseUploadFileUrl, String year, String month) {

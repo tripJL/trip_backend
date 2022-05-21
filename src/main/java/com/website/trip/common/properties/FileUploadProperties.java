@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-@ConfigurationProperties("upload-file")
-public class UploadFileProperties {
+@ConfigurationProperties("file-upload")
+public class FileUploadProperties {
 
-    private String baseUploadFileUrl;
+    private String baseFileUploadUrl;
     private String uploadPath;
 
     private String imgExtension;

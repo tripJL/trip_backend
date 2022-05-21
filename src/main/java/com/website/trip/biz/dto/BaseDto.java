@@ -35,6 +35,6 @@ public abstract class BaseDto {
     protected String sqlDeleteType;
 
     protected int startIndex;
-    protected int sizeIndex;
+    protected int pageSize;
 
 }

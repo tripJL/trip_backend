@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UploadFile extends BaseDto {
+public class FileUpload extends BaseDto {
 
     private long id;
-    private int length;
+    private int fileSize;
     private String originalFileName;
     private String fileExtension;
     private String saveFileName;

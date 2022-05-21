@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.website.trip.biz.dao.UploadFileDao">
-    <sql id="TABLE_NAME">upload_file</sql>
+<mapper namespace="com.website.trip.biz.dao.FileUploadDao">
+    <sql id="TABLE_NAME">file_upload</sql>
 
-    <select id="selectOne" resultType="com.website.trip.biz.dto.UploadFile">
+    <select id="selectOne" resultType="com.website.trip.biz.dto.FileUpload">
         SELECT T1.*
         FROM <include refid="TABLE_NAME"/> T1
         WHERE T1.ID = #{value}
@@ -16,7 +16,7 @@
             REG_DT
             , REG_ID
 
-            , LENGTH
+            , FILE_SIZE
             , ORIGINAL_FILE_NAME
             , FILE_EXTENSION
             , SAVE_FILE_NAME
@@ -28,7 +28,7 @@
             NOW()
             , #{loginUserId}
 
-            , #{length}
+            , #{fileSize}
             , #{originalFileName}
             , #{fileExtension}
             , #{saveFileName}
@@ -42,7 +42,7 @@
         SET (
             UPD_DT = NOW()
             , UPD_ID = #{loginUserId}
-            , LENGTH = #{length}
+            , FILE_SIZE = #{fileSize}
             , ORIGINAL_FILE_NAME = #{originalFileName}
             , FILE_EXTENSION = #{fileExtension}
             , SAVE_FILE_NAME = #{saveFileName}

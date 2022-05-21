@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TableFile {
+public class FileMapping {
 
     private final String TYPE_USER = "user";
     private final String TYPE_BOARD = "board";
@@ -17,6 +17,6 @@ public class TableFile {
     private long id;
     private String tableName;
     private long tableId;
-    private long uploadFileId;
+    private long fileUploadId;
 
 }
