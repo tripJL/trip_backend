@@ -1,8 +1,9 @@
 package com.website.trip.biz.service;
 
-import com.website.trip.biz.model.common.ServiceResult;
+import com.website.trip.biz.dto.User;
 
 public interface UserService {
 
-    ServiceResult set(Object module);
+    void create(User parameter);
+
 }

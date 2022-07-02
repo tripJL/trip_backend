@@ -16,4 +16,5 @@ public class ModifyPasswordModule {
     private String password;
     private String grade;
     private String loginType;
+
 }

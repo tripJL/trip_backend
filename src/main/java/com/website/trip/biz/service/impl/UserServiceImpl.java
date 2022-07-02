@@ -2,10 +2,6 @@ package com.website.trip.biz.service.impl;
 
 import com.website.trip.biz.dao.UserDao;
 import com.website.trip.biz.dto.User;
-import com.website.trip.biz.helper.UserHelper;
-import com.website.trip.biz.model.common.ServiceResult;
-import com.website.trip.biz.model.user.ModifyPasswordModule;
-import com.website.trip.biz.model.user.RegisterModule;
 import com.website.trip.biz.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,42 +12,9 @@ public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
 
-    private User toUserDto(Object module) {
-
-        if(module instanceof RegisterModule) {
-            return UserHelper.toDto((RegisterModule) module);
-        } else if(module instanceof ModifyPasswordModule) {
-            User parameter = UserHelper.toDto((ModifyPasswordModule) module);
-            parameter.setSqlUpdateType("MODIFY_PASSWORD");
-            return parameter;
-        } else {
-            return null;
-        }
-    }
-
     @Override
-    public ServiceResult set(Object module) {
+    public void create(User parameter) {
 
-        User parameter = this.toUserDto(module);
-
-        if(parameter == null) {
-            return ServiceResult.fail("잘못된 데이터 타입입니다.");
-        }
-
-        User user = userDao.selectOne(parameter.getLoginId());
-
-        int affected;
-
-        if(user == null) {
-            affected = userDao.insert(parameter);
-        } else {
-            affected = userDao.update(parameter);
-        }
-
-        if(affected < 1) {
-            return ServiceResult.fail("데이터 처리 중 문제 발생하였습니다.");
-        }
-
-        return ServiceResult.success();
+        userDao.insert(parameter);
     }
 }

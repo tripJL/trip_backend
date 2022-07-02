@@ -9,17 +9,18 @@ import java.util.Map;
 
 @Getter
 @AllArgsConstructor
-public enum UserCode {
+public enum UserLoginCode {
 
-    USER01("user01", "일반사용자_01"),
-    USER02("user02", "일반사용자_02"),
-    USER03("user03", "일반사용자_03"),
-    ADMIN("admin", "관리자");
+    LOCAL("local", "사이트"),
+    GOOGLE("google", "구글"),
+    NAVER("naver", "네이버"),
+    FACEBOOK("facebook", "페이스북"),
+    KAKAO("kakao", "카카오");
 
     private final String code;
     private final String value;
 
-    public static Map<String, UserCode> USER_CODE_MAP = new HashMap<>();
+    public static Map<String, UserLoginCode> USER_CODE_MAP = new HashMap<>();
 
 
     public static String getValueOfCode(String code) {
@@ -40,7 +41,7 @@ public enum UserCode {
         }
 
         for (String key : USER_CODE_MAP.keySet()) {
-            UserCode userCode = USER_CODE_MAP.get(key);
+            UserLoginCode userCode = USER_CODE_MAP.get(key);
 
             if (value.equals(userCode.getValue())) {
                 return key;

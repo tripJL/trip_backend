@@ -37,7 +37,7 @@ public class BoardServiceImpl implements BoardService {
                 .thumbnailFileId(module.getThumbnailFileId())
                 .build();
 
-        int affected = boardDao.insert(parameter);
+        boardDao.insert(parameter);
 
         if(module.getFileContentsList() != null && module.getFileContentsList().size() > 0) {
             List<FileUpload> fileUploadList = FileUploadHelper.of(module.getFileContentsList());
@@ -47,10 +47,6 @@ public class BoardServiceImpl implements BoardService {
                     boardFileMappingDao.insertBoardFile(boardFileMapping);
                 }
             }
-        }
-
-        if (affected < 1) {
-            return ServiceResult.dbFail();
         }
 
         return ServiceResult.success();
@@ -71,7 +67,7 @@ public class BoardServiceImpl implements BoardService {
 
         boardFileMappingDao.deleteFileByBoardId(BoardFileMapping.builder().boardId(parameter.getId()).build());
 
-        int affected = boardDao.update(parameter);
+        boardDao.update(parameter);
 
         if(module.getFileContentsList() != null && module.getFileContentsList().size() > 0) {
             List<FileUpload> fileUploadList = FileUploadHelper.of(module.getFileContentsList());
@@ -83,9 +79,6 @@ public class BoardServiceImpl implements BoardService {
             }
         }
 
-        if (affected < 1) {
-            return ServiceResult.dbFail();
-        }
 
         return ServiceResult.success();
     }
@@ -96,13 +89,9 @@ public class BoardServiceImpl implements BoardService {
 
         Board parameter = Board.builder().id(module.getId()).build();
 
-        int affected = boardDao.delete(parameter);
+        boardDao.delete(parameter);
 
         boardFileMappingDao.updateDelYnFileByBoardId(BoardFileMapping.builder().boardId(parameter.getId()).build());
-
-        if (affected < 1) {
-            return ServiceResult.dbFail();
-        }
 
         return ServiceResult.success();
     }

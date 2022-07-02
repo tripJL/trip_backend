@@ -41,7 +41,9 @@ public class FileUploadServiceImpl implements FileUploadService {
 
         final FileUpload result = this.upload(file);
         if (result != null && !result.getSaveFileName().isEmpty()) {
-            result.setResult(fileUploadDao.insert(result) > 0);
+            // TODO :확인 필요
+            fileUploadDao.insert(result);
+            result.setResult(true);
             return result;
         } else {
             return FileUpload.builder().result(false).build();
