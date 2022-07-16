@@ -21,11 +21,11 @@ public abstract class BaseDto {
     protected String searchValue;
 
     protected LocalDateTime regDt;
-    protected String regId;
+    protected long regId;
     protected LocalDateTime udtDT;
-    protected String udtId;
+    protected long udtId;
     protected LocalDateTime delDt;
-    protected String delId;
+    protected long delId;
     protected boolean delYn;
 
     protected String sqlInsertType;

@@ -1,4 +1,4 @@
-package com.website.trip.biz.model.user;
+package com.website.trip.biz.model.user.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ModifyPasswordModule {
+public class UserModifyPasswordInput {
 
     private String loginId;
     private String email;

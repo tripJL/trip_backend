@@ -46,7 +46,7 @@
 
         , NICK_NAME = #{nickName}
         , PROFILE_FILE_ID = #{profileFileId}
-        WHERE LOGIN_ID = #{loginId}
+        WHERE id = #{loginUserId}
     </update>
 
     <update id="updateByPassword"
@@ -56,7 +56,7 @@
         , UPD_ID = #{loginUserId}
 
         , PASSWORD = #{password}
-        WHERE LOGIN_ID = #{loginId}
+        WHERE LOGIN_ID = #{loginUserId}
     </update>
 
 

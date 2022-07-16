@@ -1,12 +1,12 @@
 package com.website.trip.biz.helper;
 
 import com.website.trip.biz.dto.User;
-import com.website.trip.biz.model.user.ModifyPasswordModule;
-import com.website.trip.biz.model.user.UserRegisterModule;
+import com.website.trip.biz.model.user.input.UserModifyPasswordInput;
+import com.website.trip.biz.model.user.input.UserInput;
 
 public class UserHelper {
 
-    public static User toDto(UserRegisterModule model) {
+    public static User toDto(UserInput model) {
 
         return User.builder()
                 .loginId(model.getLoginId())
@@ -17,7 +17,7 @@ public class UserHelper {
                 .build();
     }
 
-    public static User toDto(ModifyPasswordModule model) {
+    public static User toDto(UserModifyPasswordInput model) {
 
         return User.builder()
                 .loginId(model.getLoginId())
