@@ -20,57 +20,57 @@ public class BoardController {
 
     @PostMapping(value = {"/api/board"})
     @ApiOperation(value = "게시판 등록 API", notes = "게시판 등록 API입니다.")
-    public JsonResult create(@RequestBody BoardInput module) {
+    public JsonResult create(@RequestBody BoardInput model) {
 
-        Verification verificationModify = module.isVerificationCreate();
+        Verification verificationModify = model.isVerificationCreate();
 
         // 입력값 유효성 체크
         if (verificationModify.isFail()) {
             return JsonResult.fail(verificationModify.getMessage());
         }
 
-        boardService.create(BoardInput.toDto(module));
+        boardService.create(BoardInput.toDto(model));
 
         return JsonResult.success();
     }
 
     @PutMapping(value = {"/api/board"})
     @ApiOperation(value = "게시판 수정 API", notes = "게시판 수정 API입니다.")
-    public JsonResult modify(@RequestBody BoardInput module) {
+    public JsonResult modify(@RequestBody BoardInput model) {
 
-        Verification verificationModify = module.isVerificationModify();
+        Verification verificationModify = model.isVerificationModify();
 
         // 입력값 유효성 체크
         if (verificationModify.isFail()) {
             return JsonResult.fail(verificationModify.getMessage());
         }
 
-        Board board = boardService.detail(BoardInput.toDto(module));
+        Board board = boardService.detail(BoardInput.toDto(model));
         // 존재 유무 유효성 체크
         if (board == null) {
             return JsonResult.fail(" 존재하지 않는 게시판입니다. ");
         }
 
-        boardService.modify(BoardInput.toDto(module));
+        boardService.modify(BoardInput.toDto(model));
 
         return JsonResult.success();
     }
 
     @DeleteMapping(value = {"/api/board"})
     @ApiOperation(value = "게시판 삭제 API", notes = "게시판 삭제 API입니다.")
-    public JsonResult remove(@RequestBody BoardInput module) {
+    public JsonResult remove(@RequestBody BoardInput model) {
 
-        if (module.getId() < 1) {
+        if (model.getId() < 1) {
             return JsonResult.fail(" 존재하지 않는 게시판입니다. ");
         }
 
-        Board board = boardService.detail(BoardInput.toDto(module));
+        Board board = boardService.detail(BoardInput.toDto(model));
         // 존재 유무 유효성 체크
         if (board == null) {
             return JsonResult.fail(" 존재하지 않는 게시판입니다. ");
         }
 
-        boardService.remove(BoardInput.toDto(module));
+        boardService.remove(BoardInput.toDto(model));
 
         return JsonResult.success();
     }
