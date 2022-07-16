@@ -1,8 +1,7 @@
 package com.website.trip.biz.service;
 
 import com.website.trip.biz.dto.Board;
-
-import java.util.List;
+import com.website.trip.common.model.PageResult;
 
 public interface BoardService {
 
@@ -10,8 +9,7 @@ public interface BoardService {
     void modify(Board parameter);
     void remove(Board parameter);
 
-    List<Board> list(Board parameter);
-    long totalCount(Board parameter);
+    PageResult<Board> list(Board parameter);
     Board detail(Board parameter);
 
 }

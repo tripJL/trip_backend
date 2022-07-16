@@ -1,4 +1,4 @@
-package com.website.trip.biz.model.common;
+package com.website.trip.common.model;
 
 
 import lombok.AllArgsConstructor;

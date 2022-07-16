@@ -1,14 +1,11 @@
 package com.website.trip.biz.model.board.input;
 
 import com.website.trip.biz.dto.Board;
-import com.website.trip.biz.model.fileUpload.FileUploadAddModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
-
-import java.util.List;
 
 @Data
 @Builder

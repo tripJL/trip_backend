@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserDao extends BaseDao<User> {
 
     void updateByPassword(User parameter);
+
 }

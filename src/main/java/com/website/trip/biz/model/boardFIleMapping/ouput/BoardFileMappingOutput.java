@@ -1,4 +1,4 @@
-package com.website.trip.biz.model.fileUpload;
+package com.website.trip.biz.model.boardFIleMapping.ouput;
 
 import com.website.trip.biz.dto.FileUpload;
 import lombok.AllArgsConstructor;
@@ -14,20 +14,19 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FileUploadAddModel {
+public class BoardFileMappingOutput {
 
     private long id;
-    private String uploadUrl;
     private String uploadFullUrl;
 
-    public static FileUploadAddModel of(FileUpload dto){
-        FileUploadAddModel model = new FileUploadAddModel();
+    public static BoardFileMappingOutput of(FileUpload dto){
+        BoardFileMappingOutput model = new BoardFileMappingOutput();
         BeanUtils.copyProperties(dto, model);
         return model;
     }
 
-    public static List<FileUploadAddModel> of(List<FileUpload> dtoList) {
-        return dtoList.stream().map(FileUploadAddModel::of).collect(Collectors.toList());
+    public static List<BoardFileMappingOutput> of(List<FileUpload> dtoList) {
+        return dtoList.stream().map(BoardFileMappingOutput::of).collect(Collectors.toList());
     }
 
 }

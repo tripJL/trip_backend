@@ -30,8 +30,8 @@ public class MapUtil {
     public static Map<String, Object> setMapList(Object value1, Object value2) {
         Map<String, Object> maps = new HashMap<>();
 
-        maps.put("list", value1);
-        maps.put("totalCount", value2);
+        maps.put("totalCount", value1);
+        maps.put("list", value2);
 
         return maps;
     }

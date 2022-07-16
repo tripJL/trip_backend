@@ -1,4 +1,4 @@
-package com.website.trip.biz.model.common;
+package com.website.trip.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class JsonHeader {
+public class JsonBody {
 
-    private boolean result;
-    private String message;
-
+    private Object data;
 }

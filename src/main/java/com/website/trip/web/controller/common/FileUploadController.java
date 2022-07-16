@@ -2,7 +2,7 @@ package com.website.trip.web.controller.common;
 
 import com.website.trip.biz.dto.FileUpload;
 import com.website.trip.biz.helper.FileUploadHelper;
-import com.website.trip.biz.model.common.JsonResult;
+import com.website.trip.common.model.JsonResult;
 import com.website.trip.biz.service.FileUploadService;
 import com.website.trip.common.properties.SiteInfoProperties;
 import lombok.RequiredArgsConstructor;
