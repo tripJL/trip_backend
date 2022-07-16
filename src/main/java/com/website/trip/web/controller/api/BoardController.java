@@ -5,10 +5,9 @@ import com.website.trip.biz.model.board.input.BoardInput;
 import com.website.trip.biz.model.board.input.BoardSearchInput;
 import com.website.trip.biz.model.board.ouput.BoardDetailOutput;
 import com.website.trip.biz.model.board.ouput.BoardOutput;
-import com.website.trip.common.model.JsonResult;
 import com.website.trip.biz.service.BoardService;
+import com.website.trip.common.model.JsonResult;
 import com.website.trip.common.model.Verification;
-import com.website.trip.common.util.MapUtil;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,7 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @PostMapping("/api/board")
+    @PostMapping(value = {"/api/board"})
     @ApiOperation(value = "게시판 등록 API", notes = "게시판 등록 API입니다.")
     public JsonResult create(@RequestBody BoardInput module) {
 
@@ -35,7 +34,7 @@ public class BoardController {
         return JsonResult.success();
     }
 
-    @PutMapping("/api/board")
+    @PutMapping(value = {"/api/board"})
     @ApiOperation(value = "게시판 수정 API", notes = "게시판 수정 API입니다.")
     public JsonResult modify(@RequestBody BoardInput module) {
 
@@ -57,7 +56,7 @@ public class BoardController {
         return JsonResult.success();
     }
 
-    @DeleteMapping("/api/board")
+    @DeleteMapping(value = {"/api/board"})
     @ApiOperation(value = "게시판 삭제 API", notes = "게시판 삭제 API입니다.")
     public JsonResult remove(@RequestBody BoardInput module) {
 
@@ -77,7 +76,7 @@ public class BoardController {
     }
 
 
-    @GetMapping("/api/board")
+    @GetMapping(value = {"/api/board"})
     @ApiOperation(value = "게시판 목록 API", notes = "게시판 목록 API입니다.")
     public JsonResult list(BoardSearchInput model) {
 
@@ -86,7 +85,7 @@ public class BoardController {
         return JsonResult.success(BoardOutput.toOutput(boardService.list(BoardSearchInput.toDto(model))));
     }
 
-    @GetMapping("/api/board/{id}")
+    @GetMapping(value = {"/api/board/{id}"})
     @ApiOperation(value = "게시판 상세 API", notes = "게시판 상세 API입니다.")
     public JsonResult detail(BoardSearchInput model) {
 
