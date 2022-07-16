@@ -1,4 +1,4 @@
-package com.website.trip.biz.model.board;
+package com.website.trip.biz.model.board.ouput;
 
 import com.website.trip.biz.model.fileUpload.FileUploadAddModel;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardInsertModule {
+public class BoardOutput {
 
     private long loginUserId;
 

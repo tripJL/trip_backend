@@ -12,6 +12,6 @@ public interface BaseDao<T extends BaseDto> {
 
     T selectOne(T parameter);
     List<T> selectList(T module);
-    int selectListCount(T module);
+    long selectListCount(T module);
 
 }

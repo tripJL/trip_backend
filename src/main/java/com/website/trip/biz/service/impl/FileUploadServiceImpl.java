@@ -71,18 +71,18 @@ public class FileUploadServiceImpl implements FileUploadService {
             this.createDirectory(fileUploadProperties.getBaseFileUploadUrl(), nowYear, nowMonth);
 
             final String saveFileName = String.format("%s.%s", StringUtil.getUuid(), fileExtension);
-            final String saveLocalPath = String.format("%s/%s/%s/%s", fileUploadProperties.getBaseFileUploadUrl(), nowYear, nowMonth, saveFileName);
-            final String saveUploadPath = String.format("%s/%s/%s/%s", fileUploadProperties.getUploadPath(), nowYear, nowMonth, saveFileName);
+            final String saveRelativeUrl = String.format("%s/%s/%s/%s", fileUploadProperties.getBaseFileUploadUrl(), nowYear, nowMonth, saveFileName);
+            final String saveAbsoluteUrl = String.format("%s/%s/%s/%s", fileUploadProperties.getUploadPath(), nowYear, nowMonth, saveFileName);
 
-            final File file = new File(saveLocalPath);
+            final File file = new File(saveRelativeUrl);
             FileCopyUtils.copy(multipartFile.getInputStream(), new FileOutputStream(file));
 
             fileUpload.setSaveFileName(saveFileName);
             fileUpload.setOriginalFileName(originalFileName);
             fileUpload.setFileSize(fileSize);
             fileUpload.setFileExtension(fileExtension);
-            fileUpload.setLocalPath(saveLocalPath);
-            fileUpload.setUploadUrl(saveUploadPath);
+            fileUpload.setRelativeUrl(saveRelativeUrl);
+            fileUpload.setAbsoluteUrl(saveAbsoluteUrl);
 
         } catch (Exception e) {
             log.error("Exception error : {}", e.getMessage());

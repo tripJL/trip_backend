@@ -13,7 +13,9 @@ public class User extends BaseDto {
 
     private String loginId;
     private String email;
+    private String nickName;
     private String password;
+    private long profileFileId;
     private String grade;
     private String loginType;
 

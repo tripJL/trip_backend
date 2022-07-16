@@ -1,10 +1,12 @@
-package com.website.trip.biz.model.board;
+package com.website.trip.biz.model.board.input;
 
+import com.website.trip.biz.dto.Board;
 import com.website.trip.biz.model.fileUpload.FileUploadAddModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 
@@ -12,11 +14,10 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardUpdateModule {
+public class BoardInput {
 
     private long loginUserId;
 
-    private long id;
     private String boardType;
     private String category;
 
@@ -26,4 +27,10 @@ public class BoardUpdateModule {
     private int thumbnailFileId;
 
     private List<FileUploadAddModel> fileContentsList;
+
+    public static Board toDto(BoardInput input) {
+        Board output = new Board();
+        BeanUtils.copyProperties(input, output);
+        return output;
+    }
 }

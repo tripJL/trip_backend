@@ -9,12 +9,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardFileMapping {
+public class BoardFileMapping extends BaseDto {
 
     private long id;
     private long boardId;
     private long fileUploadId;
 
+    // JOIN
     private String originalFileName;
     private String uploadUrl;
     private String fileExtension;

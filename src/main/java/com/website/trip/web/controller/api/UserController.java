@@ -3,6 +3,7 @@ package com.website.trip.web.controller.api;
 import com.website.trip.biz.code.UserCode;
 import com.website.trip.biz.code.UserLoginCode;
 import com.website.trip.biz.model.common.JsonResult;
+import com.website.trip.biz.model.user.ModifyPasswordModule;
 import com.website.trip.biz.model.user.UserRegisterModule;
 import com.website.trip.biz.service.UserService;
 import io.swagger.annotations.ApiOperation;

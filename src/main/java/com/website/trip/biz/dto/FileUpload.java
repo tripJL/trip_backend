@@ -16,8 +16,8 @@ public class FileUpload extends BaseDto {
     private String originalFileName;
     private String fileExtension;
     private String saveFileName;
-    private String uploadUrl;
-    private String localPath;
+    private String relativeUrl;
+    private String absoluteUrl;
 
     private boolean result;
     private String message;

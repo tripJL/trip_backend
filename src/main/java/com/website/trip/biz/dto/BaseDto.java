@@ -1,12 +1,11 @@
 package com.website.trip.biz.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @SuperBuilder
@@ -21,12 +20,12 @@ public abstract class BaseDto {
     protected String searchType;
     protected String searchValue;
 
-    protected Date regDt;
-    protected int regId;
-    protected Date udtDT;
-    protected int udtId;
-    protected Date delDt;
-    protected int delId;
+    protected LocalDateTime regDt;
+    protected String regId;
+    protected LocalDateTime udtDT;
+    protected String udtId;
+    protected LocalDateTime delDt;
+    protected String delId;
     protected boolean delYn;
 
     protected String sqlInsertType;

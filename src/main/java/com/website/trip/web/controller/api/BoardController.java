@@ -1,13 +1,11 @@
 package com.website.trip.web.controller.api;
 
-import com.website.trip.biz.model.board.BoardDeleteModule;
-import com.website.trip.biz.model.board.BoardInsertModule;
-import com.website.trip.biz.model.board.BoardUpdateModule;
+import com.website.trip.biz.model.board.input.BoardInput;
+import com.website.trip.biz.model.board.input.BoardSearchInput;
 import com.website.trip.biz.model.common.JsonResult;
-import com.website.trip.biz.model.common.ServiceResult;
-import com.website.trip.biz.model.board.BoardSearchModule;
 import com.website.trip.biz.service.BoardService;
 import com.website.trip.common.util.MapUtil;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,57 +15,54 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @PostMapping("/api/board/insert.api")
-    public JsonResult insert(@RequestBody BoardInsertModule module) {
+    @PostMapping("/api/board")
+    @ApiOperation(value = "게시판 등록 API", notes = "게시판 등록 API입니다.")
+    public JsonResult create(@RequestBody BoardInput module) {
 
-        ServiceResult result = boardService.insert(module);
-
-        if (result.isFail()) {
-            return JsonResult.fail(result.getMessage());
-        }
+        boardService.create(BoardInput.toDto(module));
 
         return JsonResult.success();
     }
 
-    @PostMapping("/api/board/update.api")
-    public JsonResult update(@RequestBody BoardUpdateModule module) {
+    @PutMapping("/api/board")
+    @ApiOperation(value = "게시판 수정 API", notes = "게시판 수정 API입니다.")
+    public JsonResult modify(@RequestBody BoardInput module) {
 
-        ServiceResult result = boardService.update(module);
-
-        if (result.isFail()) {
-            return JsonResult.fail(result.getMessage());
-        }
+        boardService.modify(BoardInput.toDto(module));
 
         return JsonResult.success();
     }
 
-    @GetMapping("/api/board/list.api")
-    public JsonResult list(BoardSearchModule model) {
+    @DeleteMapping("/api/board")
+    @ApiOperation(value = "게시판 삭제 API", notes = "게시판 삭제 API입니다.")
+    public JsonResult remove(@RequestBody BoardInput module) {
+
+        boardService.remove(BoardInput.toDto(module));
+
+        return JsonResult.success();
+    }
+
+
+    @GetMapping("/api/board")
+    @ApiOperation(value = "게시판 목록 API", notes = "게시판 목록 API입니다.")
+    public JsonResult list(BoardSearchInput model) {
 
         model.initPage();
 
         return JsonResult.success(
                 MapUtil.setMapList(
-                        boardService.list(model),
-                        boardService.totalCount(model)
+                        boardService.list(BoardSearchInput.toDto(model)),
+                        boardService.totalCount(BoardSearchInput.toDto(model))
                 )
         );
     }
 
-    @GetMapping("/api/board/detail.api")
-    public JsonResult detail(BoardSearchModule model) {
+    @GetMapping("/api/board/{id}")
+    @ApiOperation(value = "게시판 상세 API", notes = "게시판 상세 API입니다.")
+    public JsonResult detail(BoardSearchInput model) {
 
-        model.initPage();
-
-        return JsonResult.success(boardService.detail(model));
+        return JsonResult.success(boardService.detail(BoardSearchInput.toDto(model)));
     }
 
-    @PostMapping("/api/board/delete.api")
-    public JsonResult delete(@RequestBody BoardDeleteModule module) {
-
-        boardService.delete(module);
-
-        return JsonResult.success();
-    }
 
 }

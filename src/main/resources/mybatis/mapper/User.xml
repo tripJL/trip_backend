@@ -4,54 +4,60 @@
 <mapper namespace="com.website.trip.biz.dao.UserDao">
     <sql id="TABLE_NAME">user</sql>
 
-    <select id="selectOne" resultType="com.website.trip.biz.dto.User">
+    <select id="selectOne"
+            parameterType="com.website.trip.biz.dto.User"
+            resultType="com.website.trip.biz.dto.User">
         SELECT T1.*
         FROM <include refid="TABLE_NAME"/> T1
-        WHERE T1.LOGIN_ID = #{value}
+        WHERE T1.LOGIN_ID = #{loginId}
     </select>
 
-    <insert id="insert">
+    <insert id="insert"
+        parameterType="com.website.trip.biz.dto.User">
         INSERT INTO <include refid="TABLE_NAME"/>
         (
-            REG_DT
-            , REG_ID
-            , LOGIN_ID
-            , EMAIL
-            , PASSWORD
-            , GRADE
-            , LOGIN_TYPE
+        REG_DT
+        , REG_ID
+
+        , LOGIN_ID
+        , EMAIL
+        , PASSWORD
+        , GRADE
+        , LOGIN_TYPE
         )
         VALUES
         (
-            NOW()
-            , #{loginUserId}
-            , #{loginId}
-            , #{email}
-            , #{password}
-            , #{grade}
-            , #{loginType}
+        NOW()
+        , #{loginUserId}
+
+        , #{loginId}
+        , #{email}
+        , #{password}
+        , #{grade}
+        , #{loginType}
         )
     </insert>
 
-    <update id="update">
+    <update id="update"
+            parameterType="com.website.trip.biz.dto.User">
         UPDATE <include refid="TABLE_NAME"/>
-        SET (
-            UPD_DT = NOW()
-            , UPD_ID = #{loginUserId}
-            <choose>
-                <when test="sqlUpdateType eq 'MODIFY_PASSWORD'">
-                    , PASSWORD = #{password}
-                </when>
-                <when test="sqlUpdateType eq ''">
+        SET UPD_DT = NOW()
+        , UPD_ID = #{loginUserId}
 
-                </when>
-                <when test="sqlUpdateType eq ''">
-
-                </when>
-                <otherwise>
-                </otherwise>
-            </choose>
-        )
+        , NICK_NAME = #{nickName}
+        , PROFILE_FILE_ID = #{profileFileId}
         WHERE LOGIN_ID = #{loginId}
     </update>
+
+    <update id="updateByPassword"
+            parameterType="com.website.trip.biz.dto.User">
+        UPDATE <include refid="TABLE_NAME"/>
+        SET UPD_DT = NOW()
+        , UPD_ID = #{loginUserId}
+
+        , PASSWORD = #{password}
+        WHERE LOGIN_ID = #{loginId}
+    </update>
+
+
 </mapper>

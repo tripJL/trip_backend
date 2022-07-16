@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.website.trip.biz.dao.FileMappingDao">
+    <sql id="TABLE_NAME">file_mapping</sql>
+
+    <sql id="requireWhere">
+        AND FM.DEL_YN = 0
+    </sql>
+
+    <select id="selectListByTableNameAndTableId"
+            parameterType="com.website.trip.biz.dto.FileMapping"
+            resultType="com.website.trip.biz.dto.FileMapping">
+        SELECT FM.ID
+        , FM.FILE_UPLOAD_ID
+        , FU.ORIGINAL_FILE_NAME
+        , FU.RELATIVE_URL
+        , FU.FILE_EXTENSION
+        , FU.FILE_SIZE
+        FROM <include refid="TABLE_NAME"/> FM
+        JOIN file_upload FU ON FU.ID = FM.FILE_UPLOAD_ID
+        WHERE FM.TABLE_NAME = #{tableName}
+        AND FM.TABLE_ID = #{tableId}
+        <include refid="requireWhere"/>
+    </select>
+
+    <insert id="insert"
+            parameterType="com.website.trip.biz.dto.FileMapping"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO <include refid="TABLE_NAME"/>
+        (
+        DEL_YN
+
+        , TABLE_NAME
+        , TABLE_ID
+        , FILE_UPLOAD_ID
+        )
+        VALUES
+        (
+        0
+
+        , #{tableName}
+        , #{tableId}
+        , #{fileUploadId}
+        )
+    </insert>
+
+    <update id="updateDelYnByTableNameAndTableId"
+            parameterType="com.website.trip.biz.dto.FileMapping">
+        UPDATE <include refid="TABLE_NAME"/>
+        SET DEL_YN = 1
+        WHERE TABLE_NAME = #{tableName}
+        AND TABLE_ID = #{tableId}
+    </update>
+
+    <delete id="deleteByTableNameAndTableId"
+            parameterType="com.website.trip.biz.dto.FileMapping">
+        DELETE FROM <include refid="TABLE_NAME"/>
+        WHERE TABLE_NAME = #{tableName}
+        AND TABLE_ID = #{tableId}
+    </delete>
+
+</mapper>

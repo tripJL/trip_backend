@@ -4,11 +4,11 @@
 <mapper namespace="com.website.trip.biz.dao.BoardDao">
     <sql id="TABLE_NAME">board</sql>
 
-    <sql id="selectWhereRequire">
+    <sql id="requireWhere">
         AND T1.DEL_YN = 0
     </sql>
 
-    <sql id="selectWhere">
+    <sql id="where">
 
         <if test="searchType != null and searchValue != null">
             <choose>
@@ -20,80 +20,93 @@
                 </when>
                 <otherwise>
                     AND (
-                        T1.TITLE = ${searchValue} OR
-                        T1.CONTENTS = ${searchValue}
+                    T1.TITLE = ${searchValue} OR
+                    T1.CONTENTS = ${searchValue}
                     )
                 </otherwise>
             </choose>
         </if>
     </sql>
 
-    <select id="selectOne" resultType="com.website.trip.biz.dto.Board">
+    <select id="selectOne"
+            parameterType="com.website.trip.biz.dto.Board"
+            resultType="com.website.trip.biz.dto.Board">
         SELECT T1.*
         FROM <include refid="TABLE_NAME"/> T1
         WHERE T1.ID = #{id}
-        <include refid="selectWhereRequire"/>
+        <include refid="requireWhere"/>
     </select>
 
-    <select id="selectList" resultType="com.website.trip.biz.dto.Board">
+    <select id="selectList"
+            parameterType="com.website.trip.biz.dto.Board"
+            resultType="com.website.trip.biz.dto.Board">
         SELECT T1.*
         FROM <include refid="TABLE_NAME"/> T1
         WHERE 1 = 1
-        <include refid="selectWhereRequire"/>
-        <include refid="selectWhere"/>
+        <include refid="requireWhere"/>
+        <include refid="where"/>
         ORDER BY T1.ID DESC
         LIMIT #{startIndex}, #{pageSize}
     </select>
 
-    <select id="selectListCount" resultType="int">
+    <select id="selectListCount"
+            parameterType="com.website.trip.biz.dto.Board"
+            resultType="long">
         SELECT COUNT(*)
         FROM <include refid="TABLE_NAME"/> T1
         WHERE 1 = 1
-        <include refid="selectWhereRequire"/>
-        <include refid="selectWhere"/>
+        <include refid="requireWhere"/>
+        <include refid="where"/>
     </select>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert"
+            parameterType="com.website.trip.biz.dto.Board"
+            useGeneratedKeys="true" keyProperty="id">
         INSERT INTO <include refid="TABLE_NAME"/>
         (
-            REG_DT
-            , REG_ID
-            , BOARD_TYPE
-            , CATEGORY
-            , TITLE
-            , CONTENTS
-            , HITS
-            , THUMBNAIL_FILE_ID
-            , DEL_YN
+        REG_DT
+        , REG_ID
+        , UDT_DT
+        , DEL_YN
+
+        , BOARD_TYPE
+        , CATEGORY
+        , TITLE
+        , CONTENTS
+        , HITS
+        , THUMBNAIL_FILE_ID
         )
         VALUES
         (
-            NOW()
-            , #{loginUserId}
-            , #{boardType}
-            , #{category}
-            , #{title}
-            , #{contents}
-            , #{hits}
-            , #{thumbnailFileId}
-            , 0
+        NOW()
+        , #{loginUserId}
+        , NOW()
+        , 0
+
+        , #{boardType}
+        , #{category}
+        , #{title}
+        , #{contents}
+        , #{hits}
+        , #{thumbnailFileId}
         )
     </insert>
 
-    <update id="update">
+    <update id="update"
+            parameterType="com.website.trip.biz.dto.Board">
         UPDATE <include refid="TABLE_NAME"/>
-        SET
-            UPD_DT = NOW()
-            , UPD_ID = #{loginUserId}
-            , BOARD_TYPE = #{boardType}
-            , CATEGORY = #{category}
-            , TITLE = #{title}
-            , CONTENTS = #{contents}
-            , THUMBNAIL_FILE_ID = #{thumbnailFileId}
+        SET UPD_DT = NOW()
+        , UPD_ID = #{loginUserId}
+        , BOARD_TYPE = #{boardType}
+        , CATEGORY = #{category}
+        , TITLE = #{title}
+        , CONTENTS = #{contents}
+        , THUMBNAIL_FILE_ID = #{thumbnailFileId}
         WHERE ID = #{id}
     </update>
 
-    <update id="delete">
+    <update id="delete"
+            parameterType="com.website.trip.biz.dto.Board">
         UPDATE <include refid="TABLE_NAME"/>
         SET (
         DEL_DT = NOW()

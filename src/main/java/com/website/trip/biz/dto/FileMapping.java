@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FileMapping {
+public class FileMapping extends BaseDto {
 
     private final String TYPE_USER = "user";
 
@@ -17,5 +17,11 @@ public class FileMapping {
     private String tableName;
     private long tableId;
     private long fileUploadId;
+
+    // JOIN
+    private String originalFileName;
+    private String relativeUrl;
+    private String fileExtension;
+    private String fileSize;
 
 }

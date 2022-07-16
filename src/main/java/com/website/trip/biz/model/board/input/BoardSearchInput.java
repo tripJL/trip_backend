@@ -1,15 +1,20 @@
-package com.website.trip.biz.model.board;
+package com.website.trip.biz.model.board.input;
 
+import com.website.trip.biz.dto.Board;
+import com.website.trip.biz.model.fileUpload.FileUploadAddModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
+
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardSearchModule {
+public class BoardSearchInput {
 
     private long id;
 
@@ -31,5 +36,11 @@ public class BoardSearchModule {
         }
 
         this.startIndex = (this.pageIndex - 1) * this.pageSize;
+    }
+
+    public static Board toDto(BoardSearchInput input) {
+        Board output = new Board();
+        BeanUtils.copyProperties(input, output);
+        return output;
     }
 }

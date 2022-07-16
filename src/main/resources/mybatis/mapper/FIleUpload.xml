@@ -4,24 +4,30 @@
 <mapper namespace="com.website.trip.biz.dao.FileUploadDao">
     <sql id="TABLE_NAME">file_upload</sql>
 
-    <select id="selectOne" resultType="com.website.trip.biz.dto.FileUpload">
+    <select id="selectOne"
+            parameterType="com.website.trip.biz.dto.FileUpload"
+            resultType="com.website.trip.biz.dto.FileUpload">
         SELECT T1.*
         FROM <include refid="TABLE_NAME"/> T1
-        WHERE T1.ID = #{value}
+        WHERE T1.ID = #{id}
     </select>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert"
+            parameterType="com.website.trip.biz.dto.FileUpload"
+            useGeneratedKeys="true" keyProperty="id">
         INSERT INTO <include refid="TABLE_NAME"/>
         (
             REG_DT
             , REG_ID
+            , UDT_DT
+            , UDT_ID
 
             , FILE_SIZE
             , ORIGINAL_FILE_NAME
             , FILE_EXTENSION
             , SAVE_FILE_NAME
-            , UPLOAD_URL
-            , LOCAL_PATH
+            , RELATIVE_URL
+            , ABSOLUTE_URL
         )
         VALUES
         (
@@ -32,27 +38,27 @@
             , #{originalFileName}
             , #{fileExtension}
             , #{saveFileName}
-            , #{uploadUrl}
-            , #{localPath}
+            , #{relativeUrl}
+            , #{absoluteUrl}
         )
     </insert>
 
-    <update id="update">
+    <update id="update"
+            parameterType="com.website.trip.biz.dto.FileUpload">
         UPDATE <include refid="TABLE_NAME"/>
-        SET (
-            UPD_DT = NOW()
-            , UPD_ID = #{loginUserId}
-            , FILE_SIZE = #{fileSize}
-            , ORIGINAL_FILE_NAME = #{originalFileName}
-            , FILE_EXTENSION = #{fileExtension}
-            , SAVE_FILE_NAME = #{saveFileName}
-            , UPLOAD_URL = #{uploadUrl}
-            , LOCAL_PATH = #{localPath}
-        )
+        SET UPD_DT = NOW()
+        , UPD_ID = #{loginUserId}
+        , FILE_SIZE = #{fileSize}
+        , ORIGINAL_FILE_NAME = #{originalFileName}
+        , FILE_EXTENSION = #{fileExtension}
+        , SAVE_FILE_NAME = #{saveFileName}
+        , RELATIVE_URL = #{relativeUrl}
+        , ABSOLUTE_URL = #{absoluteUrl}
         WHERE ID = #{id}
     </update>
 
-    <delete id="delete">
+    <delete id="delete"
+            parameterType="com.website.trip.biz.dto.FileUpload">
         DELETE FROM <include refid="TABLE_NAME"/>
         WHERE ID = #{id}
     </delete>

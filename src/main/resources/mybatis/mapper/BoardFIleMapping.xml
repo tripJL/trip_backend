@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.website.trip.biz.dao.BoardFileMappingDao">
+    <sql id="TABLE_NAME">board_file_mapping</sql>
+
+    <sql id="requireWhere">
+        AND BFM.DEL_YN = 0
+    </sql>
+
+    <insert id="insert"
+            parameterType="com.website.trip.biz.dto.BoardFileMapping"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO <include refid="TABLE_NAME"/>
+        (
+        DEL_YN
+
+        , BOARD_ID
+        , FILE_UPLOAD_ID
+        )
+        VALUES
+        (
+        0
+
+        , #{boardId}
+        , #{fileUploadId}
+        )
+    </insert>
+
+    <select id="selectFileByBoardId"
+            parameterType="com.website.trip.biz.dto.BoardFileMapping"
+            resultType="com.website.trip.biz.dto.BoardFileMapping">
+        SELECT BFM.ID
+        , FM.FILE_UPLOAD_ID
+        , FU.ORIGINAL_FILE_NAME
+        , FU.RELATIVE_URL
+        , FU.FILE_EXTENSION
+        , FU.FILE_SIZE
+        FROM <include refid="TABLE_NAME"/> BFM
+        JOIN file_upload FU ON FU.ID = BFM.FILE_UPLOAD_ID
+        WHERE BFM.BOARD_ID = #{boardId}
+        <include refid="requireWhere"/>
+    </select>
+
+    <delete id="deleteFileByBoardId"
+            parameterType="com.website.trip.biz.dto.BoardFileMapping">
+        DELETE
+        FROM <include refid="TABLE_NAME"/>
+        WHERE BOARD_ID = #{boardId}
+    </delete>
+
+    <update id="updateDelYnFileByBoardId"
+            parameterType="com.website.trip.biz.dto.BoardFileMapping">
+        UPDATE <include refid="TABLE_NAME"/>
+        SET DEL_YN = 1
+        WHERE BOARD_ID = #{boardId}
+    </update>
+</mapper>

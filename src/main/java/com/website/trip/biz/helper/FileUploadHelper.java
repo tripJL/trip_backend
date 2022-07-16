@@ -14,7 +14,7 @@ public class FileUploadHelper {
     public static FileUploadJsonModel toModel(FileUpload parameter, String baseUrl) {
         return FileUploadJsonModel.builder()
                 .id(parameter.getId())
-                .uploadFullUrl(StringUtil.isNotEmpty(parameter.getUploadUrl()) ? baseUrl + parameter.getUploadUrl() : "")
+                .uploadFullUrl(StringUtil.isNotEmpty(parameter.getRelativeUrl()) ? baseUrl + parameter.getRelativeUrl() : "")
                 .build();
     }
 
