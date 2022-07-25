@@ -75,7 +75,6 @@ public class BoardController {
         return JsonResult.success();
     }
 
-
     @GetMapping(value = {"/api/board"})
     @ApiOperation(value = "게시판 목록 API", notes = "게시판 목록 API입니다.")
     public JsonResult list(BoardSearchInput model) {

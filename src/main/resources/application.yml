@@ -22,7 +22,6 @@ mybatis:
 site-info:
   base-server-url: http://localhost:8080
 
-
-file-upload::
-  img-extension: .png .jpg .jpeg .gif
+jwt:
+  secret: trip1234
 
